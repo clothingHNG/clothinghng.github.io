@@ -1,37 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Shop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZARA Clone - Thời Trang Cao Cấp</title>
+    <style>
+        /* Phong cách tối giản của Zara */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-<style>
-body {
-  font-family: Arial;
-  text-align: center;
-}
+        /* Thanh điều hướng */
+        header {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+        }
 
-img {
-  width: 300px;
-}
+        h1 {
+            font-size: 80px;
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: -5px;
+            line-height: 0.8;
+        }
 
-button {
-  padding: 10px;
-  background: black;
-  color: white;
-}
-</style>
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 50px;
+        }
 
+        nav ul li {
+            margin-bottom: 10px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Khu vực sản phẩm */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            margin-top: 100px;
+            justify-content: flex-end; /* Zara thường để trống bên trái cho menu */
+        }
+
+        .product-card {
+            width: 30%;
+            margin: 10px;
+            margin-bottom: 50px;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-top: 10px;
+        }
+
+        .buy-btn {
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            width: 100%;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* Phản hồi trên điện thoại */
+        @media (max-width: 768px) {
+            h1 { font-size: 40px; }
+            .product-card { width: 45%; }
+            header { position: relative; left: 20px; top: 20px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Clothing Shop</h1>
+<header>
+    <h1>ZARA</h1>
+    <nav>
+        <ul>
+            <li>Nữ</li>
+            <li>Nam</li>
+            <li>Trẻ em</li>
+            <li>Shoes & Bags</li>
+            <li style="font-weight: bold; color: #ff0000;">SALE</li>
+        </ul>
+    </nav>
+</header>
 
-<img src="https://via.placeholder.com/300">
+<div class="container">
+    <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1539109132314-34a77ae7012d?auto=format&fit=crop&w=500&q=80" alt="Áo thun">
+        <div class="product-info">
+            <span>ÁO KHOÁC DẠ CAO CẤP</span>
+            <span>1.599.000 VND</span>
+        </div>
+        <button class="buy-btn">Thêm vào giỏ hàng</button>
+    </div>
 
-<p>Áo đẹp giá rẻ</p>
+    <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=500&q=80" alt="Váy">
+        <div class="product-info">
+            <span>VÁY LỤA THỜI TRANG</span>
+            <span>999.000 VND</span>
+        </div>
+        <button class="buy-btn">Thêm vào giỏ hàng</button>
+    </div>
 
-<button>mua ngay</button>
+    </div>
 
 </body>
 </html>
