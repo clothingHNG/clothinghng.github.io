@@ -89,3 +89,122 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop A/B Test Giá</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 30px;
+      width: 300px;
+      margin: auto;
+      border-radius: 10px;
+    }
+
+    .price {
+      font-size: 26px;
+      margin: 20px 0;
+    }
+
+    .old {
+      text-decoration: line-through;
+      color: gray;
+      margin-right: 10px;
+    }
+
+    .discount {
+      color: red;
+      font-weight: bold;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      font-size: 16px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Áo Hoodie Form Rộng</h2>
+
+  <div class="price">
+    <span class="old" id="oldPrice"></span>
+    <span id="newPrice"></span>
+    <span class="discount" id="discount"></span>
+  </div>
+
+  <button class="btn" id="buyBtn">Mua ngay</button>
+  <p id="version"></p>
+</div>
+
+<script>
+  const originalPrice = 100000; // 100k won
+
+  // Lấy version
+  let version = localStorage.getItem("priceVersion");
+
+  if (!version) {
+    version = Math.random() < 0.5 ? "A" : "B";
+    localStorage.setItem("priceVersion", version);
+  }
+
+  let discountText = "";
+  let newPrice = originalPrice;
+
+  if (version === "A") {
+    // % giảm
+    const percents = [10, 20, 30, 50];
+    const percent = percents[Math.floor(Math.random() * percents.length)];
+
+    newPrice = originalPrice * (1 - percent / 100);
+    discountText = "-" + percent + "%";
+
+    var testKey = "A_" + percent;
+  } else {
+    // giảm tiền
+    const amounts = [10000, 20000, 30000];
+    const amount = amounts[Math.floor(Math.random() * amounts.length)];
+
+    newPrice = originalPrice - amount;
+    discountText = "-" + amount.toLocaleString() + "₩";
+
+    var testKey = "B_" + amount;
+  }
+
+  // Hiển thị giá
+  document.getElementById("oldPrice").innerText = originalPrice.toLocaleString() + "₩";
+  document.getElementById("newPrice").innerText = Math.floor(newPrice).toLocaleString() + "₩";
+  document.getElementById("discount").innerText = "(" + discountText + ")";
+  document.getElementById("version").innerText = "Version: " + version;
+
+  // Track click
+  document.getElementById("buyBtn").addEventListener("click", () => {
+    let data = JSON.parse(localStorage.getItem("priceTest")) || {};
+
+    if (!data[testKey]) {
+      data[testKey] = 0;
+    }
+
+    data[testKey]++;
+    localStorage.setItem("priceTest", JSON.stringify(data));
+
+    alert("Bạn click: " + discountText);
+  });
+</script>
+
+</body>
+</html>
