@@ -1,119 +1,153 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Shop A/B Test Giá</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      margin-top: 80px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR - Thời Trang Cao Cấp</title>
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap)" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .card {
-      border: 1px solid #ddd;
-      padding: 30px;
-      width: 300px;
-      margin: auto;
-      border-radius: 10px;
-    }
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray: #767676;
+            --gray-dark: #333333;
+            --red: #cc0000;
+        }
 
-    .price {
-      font-size: 26px;
-      margin: 20px 0;
-    }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            color: var(--black);
+            background: var(--white);
+            line-height: 1.6;
+        }
 
-    .old {
-      text-decoration: line-through;
-      color: gray;
-      margin-right: 10px;
-    }
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-light);
+        }
 
-    .discount {
-      color: red;
-      font-weight: bold;
-    }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+        }
 
-    .btn {
-      padding: 12px 25px;
-      font-size: 16px;
-      background: black;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
 
-<div class="card">
-  <h2>Áo Hoodie Form Rộng</h2>
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
 
-  <div class="price">
-    <span class="old" id="oldPrice"></span>
-    <span id="newPrice"></span>
-    <span class="discount" id="discount"></span>
-  </div>
+        nav a {
+            text-decoration: none;
+            color: var(--black);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
 
-  <button class="btn" id="buyBtn">Mua ngay</button>
-  <p id="version"></p>
-</div>
+        nav a:hover {
+            opacity: 0.6;
+        }
 
-<script>
-  const originalPrice = 100000; // 100k won
+        .header-icons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
 
-  // Lấy version
-  let version = localStorage.getItem("priceVersion");
+        .header-icons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
-  if (!version) {
-    version = Math.random() < 0.5 ? "A" : "B";
-    localStorage.setItem("priceVersion", version);
-  }
+        .cart-count {
+            background: var(--black);
+            color: var(--white);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 5px;
+        }
 
-  let discountText = "";
-  let newPrice = originalPrice;
+        /* A/B Test Banner */
+        .ab-test-banner {
+            background: var(--black);
+            color: var(--white);
+            padding: 10px 40px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  if (version === "A") {
-    // % giảm
-    const percents = [10, 20, 30, 50];
-    const percent = percents[Math.floor(Math.random() * percents.length)];
+        .ab-test-banner select {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--white);
+            padding: 5px 10px;
+            font-size: 11px;
+            cursor: pointer;
+        }
 
-    newPrice = originalPrice * (1 - percent / 100);
-    discountText = "-" + percent + "%";
+        .ab-test-banner option {
+            color: var(--black);
+        }
 
-    var testKey = "A_" + percent;
-  } else {
-    // giảm tiền
-    const amounts = [10000, 20000, 30000];
-    const amount = amounts[Math.floor(Math.random() * amounts.length)];
+        /* Hero */
+        .hero {
+            margin-top: 100px;
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), 
+                        url('[images.unsplash.com](https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920)') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
 
-    newPrice = originalPrice - amount;
-    discountText = "-" + amount.toLocaleString() + "₩";
+        .hero-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 300;
+            letter-spacing: 15px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
 
-    var testKey = "B_" + amount;
-  }
-
-  // Hiển thị giá
-  document.getElementById("oldPrice").innerText = originalPrice.toLocaleString() + "₩";
-  document.getElementById("newPrice").innerText = Math.floor(newPrice).toLocaleString() + "₩";
-  document.getElementById("discount").innerText = "(" + discountText + ")";
-  document.getElementById("version").innerText = "Version: " + version;
-
-  // Track click
-  document.getElementById("buyBtn").addEventListener("click", () => {
-    let data = JSON.parse(localStorage.getItem("priceTest")) || {};
-
-    if (!data[testKey]) {
-      data[testKey] = 0;
-    }
-
-    data[testKey]++;
-    localStorage.setItem("priceTest", JSON.stringify(data));
-
-    alert("Bạn click: " + discountText);
-  });
-</script>
-
-</body>
-</html>
+        .hero-content p {
+            
