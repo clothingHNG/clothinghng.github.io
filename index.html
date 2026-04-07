@@ -1,14 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>상품 상세</title>
+
+<style>
+body{font-family:sans-serif;margin:0;padding:20px;}
+.container{display:flex;gap:40px;}
+img{width:400px;}
+.price{color:red;font-size:20px;font-weight:bold;}
+.old{color:gray;text-decoration:line-through;}
+button{padding:10px;background:black;color:white;border:none;cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<img id="image">
+<div>
+<h2 id="name"></h2>
+
+<p class="price" id="price"></p>
+<p class="old" id="old"></p>
+<p id="discount"></p>
+
+<select id="size">
+<option>S</option>
+<option>M</option>
+<option>L</option>
+</select>
+
+<br><br>
+<button onclick="addToCart()">장바구니 추가</button>
+<button onclick="checkout()">바로 구매</button>
+
+</div>
+</div>
+
 <script>
-// ===== PRODUCT DATA =====
-const products = [
+
+// ===== DATA (giống index) =====
+const products=[
 {
 id:1,
 name:"오버사이즈 블레이저",
 originalPrice:2490000,
 discountPercent:30,
 discountAmount:747000,
-image:"https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600",
-isSale:true
+image:"https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600"
 },
 {
 id:2,
@@ -16,82 +56,63 @@ name:"린넨 팬츠",
 originalPrice:1290000,
 discountPercent:25,
 discountAmount:322500,
-image:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600",
-isSale:true
-},
-{
-id:3,
-name:"셔츠",
-originalPrice:890000,
-discountPercent:40,
-discountAmount:356000,
-image:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600",
-isSale:true
+image:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600"
 }
 ];
 
-// ===== A/B TEST =====
-let variant = Math.random() > 0.5 ? "A" : "B";
+// ===== GET PRODUCT =====
+const id = localStorage.getItem("selectedProduct");
+const p = products.find(x=>x.id==id);
 
-// ===== FORMAT PRICE =====
-function format(price){
-return new Intl.NumberFormat('ko-KR').format(price)+"원";
+// ===== A/B =====
+let variant = localStorage.getItem("variant");
+
+// ===== FORMAT =====
+function format(x){
+return new Intl.NumberFormat('ko-KR').format(x)+"원";
 }
 
-// ===== CALCULATE PRICE =====
-function getPrice(p){
-if(!p.isSale) return p.originalPrice;
-
+// ===== PRICE =====
+function getPrice(){
 if(variant==="A"){
-return p.originalPrice - (p.originalPrice * p.discountPercent/100);
+return p.originalPrice - (p.originalPrice*p.discountPercent/100);
 }else{
 return p.originalPrice - p.discountAmount;
 }
 }
 
-// ===== DISCOUNT TEXT =====
-function getDiscountText(p){
-if(!p.isSale) return "";
-
-if(variant==="A"){
-return "-"+p.discountPercent+"%";
-}else{
-return "-"+format(p.discountAmount);
-}
-}
-
 // ===== RENDER =====
-function render(){
-document.getElementById("products").innerHTML = products.map(p=>{
-const price = getPrice(p);
-const discount = getDiscountText(p);
+document.getElementById("image").src = p.image;
+document.getElementById("name").innerText = p.name;
 
-return `
-<div class="product">
-<img src="${p.image}">
-<h3>${p.name}</h3>
+const price = getPrice();
 
-<p style="color:red;font-weight:bold">${format(price)}</p>
-<p style="text-decoration:line-through;color:gray">${format(p.originalPrice)}</p>
-<p style="color:#cc0000">${discount}</p>
+document.getElementById("price").innerText = format(price);
+document.getElementById("old").innerText = format(p.originalPrice);
 
-<button onclick="buy('${p.name}')">구매하기</button>
-</div>
-`;
-}).join("");
+document.getElementById("discount").innerText =
+variant==="A" ? "-"+p.discountPercent+"%" : "-"+format(p.discountAmount);
+
+// ===== CART =====
+function addToCart(){
+let cart = JSON.parse(localStorage.getItem("cart")||"[]");
+
+cart.push({
+name:p.name,
+price:getPrice()
+});
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+alert("장바구니 추가됨!");
 }
 
-// ===== BUY =====
-function buy(name){
-alert(name+" 구매 완료!");
+// ===== CHECKOUT =====
+function checkout(){
+alert("결제 완료! (테스트)");
 }
 
-// ===== SWITCH MANUAL =====
-function switchVariant(v){
-variant = v;
-render();
-}
-
-// ===== INIT =====
-render();
 </script>
+
+</body>
+</html>
