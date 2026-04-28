@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOIR - Thời Trang Cao Cấp</title>
+    <title>E TeAm </title>
     <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap)" rel="stylesheet">
     <style>
         * {
@@ -727,12 +727,12 @@
 <body>
     <!-- A/B Test Control Banner -->
     <div class="ab-test-banner">
-        <span>🧪 A/B TEST MODE: Đang hiển thị <strong id="current-variant">Biến thể A (Giảm %)</strong></span>
+        <span>🧪 A/B 테스트 모드: 현재 표시 중 <strong id="current-variant">변형 A (퍼센트 할인)</strong></span>
         <div>
-            <label>Chọn biến thể: </label>
+            <label>변형 선택: </label>
             <select id="variant-selector" onchange="switchVariant(this.value)">
-                <option value="A">Biến thể A - Giảm theo %</option>
-                <option value="B">Biến thể B - Giảm giá trực tiếp</option>
+                <option value="A">변형 A - 퍼센트 할인</option>
+                <option value="B">변형 B - 직접 할인</option>
             </select>
         </div>
     </div>
@@ -819,7 +819,7 @@
         <h2>뉴스레터 구독</h2>
         <p>신상품 및 단독 할인 혜택을 받아보세요</p>
         <form class="newsletter-form">
-            <input type="email" placeholder="Nhập email của bạn">
+            <input type="email" placeholder="이메일을 입력하세요">
             <button type="submit">구독하기</button>
         </form>
     </section>
@@ -891,7 +891,7 @@
     </div>
 
     <!-- A/B Stats Panel -->
-    <button class="toggle-stats" id="toggle-stats" onclick="toggleStats()">📊 Xem thống kê A/B</button>
+    <button class="toggle-stats" id="toggle-stats" onclick="toggleStats()">📊 A/B 통계 보기</button>
     <div class="ab-stats" id="ab-stats">
      <h4>📊 A/B 테스트 통계</h4>
         <div class="stat-row">
@@ -927,8 +927,8 @@
                 originalPrice: 2490000,
                 discountPercent: 30,
                 discountAmount: 747000,
-                image: "[images.unsplash.com](https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600)",
-                hoverImage: "[images.unsplash.com](https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600)",
+                image: "https://clothinghng.github.io/yura.jpeg",
+                hoverImage: "https://clothinghng.github.io/yura.jpeg",
                 sizes: ["XS", "S", "M", "L", "XL"],
                 isNew: false,
                 isSale: true
@@ -939,8 +939,8 @@
                 originalPrice: 1290000,
                 discountPercent: 25,
                 discountAmount: 322500,
-                image: "[images.unsplash.com](https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600)",
-                hoverImage: "[images.unsplash.com](https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600)",
+                image: "https://clothinghng.github.io/yura.jpeg",
+                hoverImage: "https://clothinghng.github.io/yura.jpeg",
                 sizes: ["XS", "S", "M", "L"],
                 isNew: false,
                 isSale: true
@@ -951,8 +951,8 @@
                 originalPrice: 890000,
                 discountPercent: 40,
                 discountAmount: 356000,
-                image: "[images.unsplash.com](https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600)",
-                hoverImage: "[images.unsplash.com](https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600)",
+                image: "https://clothinghng.github.io/yura.jpeg",
+                hoverImage: "https://clothinghng.github.io/yura.jpeg",
                 sizes: ["S", "M", "L", "XL"],
                 isNew: false,
                 isSale: true
@@ -963,8 +963,8 @@
                 originalPrice: 1690000,
                 discountPercent: 35,
                 discountAmount: 591500,
-                image: "[images.unsplash.com](https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600)",
-                hoverImage: "[images.unsplash.com](https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600)",
+                image: "https://clothinghng.github.io/yura.jpeg",
+                hoverImage: "https://clothinghng.github.io/yura.jpeg",
                 sizes: ["XS", "S", "M", "L"],
                 isNew: false,
                 isSale: true
@@ -1233,10 +1233,10 @@
 
         function checkout() {
             if (cart.length === 0) {
-                alert('Giỏ hàng trống!');
+                alert('장바구니 비어!');
                 return;
             }
-            alert(`Thanh toán thành công!\n\nBiến thể: ${currentVariant}\nSố sản phẩm: ${cart.reduce((s, i) => s + i.quantity, 0)}\nTổng tiền: ${document.getElementById('cart-total').textContent}`);
+            alert(`결제 완료!\n\n변형: ${currentVariant}\nSố sản phẩm: ${cart.reduce((s, i) => s + i.quantity, 0)}\n총결제: ${document.getElementById('cart-total').textContent}`);
             cart = [];
             updateCart();
             toggleCart();
@@ -1246,8 +1246,8 @@
         function switchVariant(variant) {
             currentVariant = variant;
             document.getElementById('current-variant').innerHTML = variant === 'A' 
-                ? 'Biến thể A (Giảm %)' 
-                : 'Biến thể B (Giảm giá trực tiếp)';
+                ? '변형 A (퍼센트 할인)' 
+                : 'Biến thể B (직접 할인)';
             document.getElementById('stat-variant').textContent = variant;
             renderProducts();
             updateStatsDisplay();
