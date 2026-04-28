@@ -878,14 +878,14 @@
                 <button class="close-cart" onclick="toggleCart()">×</button>
             </div>
             <div class="cart-items" id="cart-items">
-                <p style="text-align: center; color: var(--gray); padding: 50px 0;">Giỏ hàng trống</p>
+                <p style="text-align: center; color: var(--gray); padding: 50px 0;">장바구니가 비어 있음</p>
             </div>
             <div class="cart-footer">
                 <div class="cart-total">
                     <span>총합계</span>
                     <span id="cart-total">0₫</span>
                 </div>
-                <button class="checkout-btn" onclick="checkout()">Thanh toán</button>
+                <button class="checkout-btn" onclick="checkout()">결제</button>
             </div>
         </div>
     </div>
@@ -893,21 +893,21 @@
     <!-- A/B Stats Panel -->
     <button class="toggle-stats" id="toggle-stats" onclick="toggleStats()">📊 Xem thống kê A/B</button>
     <div class="ab-stats" id="ab-stats">
-        <h4>📊 Thống kê A/B Test</h4>
+     <h4>📊 A/B 테스트 통계</h4>
         <div class="stat-row">
-            <span class="stat-label">Biến thể hiện tại:</span>
+            <span class="stat-label">현재 버전:</span>
             <span class="stat-value" id="stat-variant">A</span>
         </div>
         <div class="stat-row">
-            <span class="stat-label">Lượt xem sản phẩm:</span>
+            <span class="stat-label">상품 조회수:</span>
             <span class="stat-value" id="stat-views">0</span>
         </div>
         <div class="stat-row">
-            <span class="stat-label">Thêm vào giỏ:</span>
+            <span class="stat-label">장바구니 추가:</span>
             <span class="stat-value" id="stat-adds">0</span>
         </div>
         <div class="stat-row">
-            <span class="stat-label">Tỷ lệ chuyển đổi:</span>
+            <span class="stat-label">전환율:</span>
             <span class="stat-value highlight" id="stat-conversion">0%</span>
         </div>
         <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--gray-light);">
