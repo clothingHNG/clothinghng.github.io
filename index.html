@@ -1289,34 +1289,32 @@
         }
 
         // Initialize
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            // Random A/B assignment
             currentVariant = Math.random() > 0.5 ? 'A' : 'B';
             document.getElementById('variant-selector').value = currentVariant;
             switchVariant(currentVariant);
+
+            translatePage();
         });
-    <script>
 
-        </script>
-function translatePage() {
-  document.querySelectorAll("a, button, span, h1, h2, h3, p").forEach(el => {
-    const text = el.textContent.trim();
+        function translatePage() {
+            document.querySelectorAll("a, button, span, h1, h2, h3, p").forEach(el => {
+                const text = el.textContent.trim();
 
-    if (text === "Nữ") el.textContent = "여성";
-    if (text === "Nam") el.textContent = "남성";
-    if (text === "Trẻ Em") el.textContent = "키즈";
-    if (text === "Phụ Kiện") el.textContent = "액세서리";
-    if (text === "Tìm kiếm") el.textContent = "검색";
-    if (text === "Đăng nhập") el.textContent = "로그인";
-    if (text.includes("Giỏ hàng")) el.textContent = "장바구니";
-    if (text === "Khám phá ngay") el.textContent = "지금 쇼핑하기";
-  });
-}
+                if (text === "Nữ") el.textContent = "여성";
+                if (text === "Nam") el.textContent = "남성";
+                if (text === "Trẻ Em") el.textContent = "키즈";
+                if (text === "Phụ Kiện") el.textContent = "액세서리";
+                if (text === "Tìm kiếm") el.textContent = "검색";
+                if (text === "Đăng nhập") el.textContent = "로그인";
+                if (text.includes("Giỏ hàng")) el.textContent = "장바구니";
+                if (text === "Khám phá ngay") el.textContent = "지금 쇼핑하기";
+            });
+        }
+    </script>
 
-translatePage();
-</script>
-
-<img src="https://clothinghng.github.io/images/banner.jpg" width="400">
+    <img src="https://clothinghng.github.io/images/banner.jpg" width="400">
 
 </body>
 </html>
