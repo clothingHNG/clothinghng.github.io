@@ -1296,25 +1296,25 @@
             switchVariant(currentVariant);
         });
     </script>
-    <img src="https://clothinghng.github.io/images/banner.jpg" width="400">
-</body>
-</html>
-const dict = {
-  "Nữ":"여성",
-  "Nam":"남성",
-  "Trẻ Em":"키즈",
-  "Phụ Kiện":"액세서리",
-  "Tìm kiếm":"검색",
-  "Đăng nhập":"로그인",
-  "Giỏ hàng":"장바구니",
-  "Khám phá ngay":"지금 쇼핑하기"
-};
+    function translatePage() {
+  document.querySelectorAll("a, button, span, h1, h2, h3, p").forEach(el => {
+    const text = el.textContent.trim();
 
-function translatePage(){
-  document.body.innerHTML = document.body.innerHTML.replace(
-    new RegExp(Object.keys(dict).join("|"), "g"),
-    match => dict[match]
-  );
+    if (text === "Nữ") el.textContent = "여성";
+    if (text === "Nam") el.textContent = "남성";
+    if (text === "Trẻ Em") el.textContent = "키즈";
+    if (text === "Phụ Kiện") el.textContent = "액세서리";
+    if (text === "Tìm kiếm") el.textContent = "검색";
+    if (text === "Đăng nhập") el.textContent = "로그인";
+    if (text.includes("Giỏ hàng")) el.textContent = "장바구니";
+    if (text === "Khám phá ngay") el.textContent = "지금 쇼핑하기";
+  });
 }
 
 translatePage();
+</script>
+
+<img src="https://clothinghng.github.io/images/banner.jpg" width="400">
+    
+</body>
+</html>
