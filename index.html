@@ -1155,16 +1155,21 @@
         }
 
         // Track view
+        // Track view
         function trackView(productId) {
-            stats[currentVariant].views++;
-            updateStatsDisplay();
+         stats[currentVariant].views++;
+
+    logFirebaseClick(productId, currentVariant);
+
+    updateStatsDisplay();
         }
+        
 
         // Add to cart
         function addToCart(productId) {
             const product = [...products, ...newArrivals].find(p => p.id === productId);
             if (!product) return;
-            
+            logAddToCart(productId, currentVariant);
             const size = selectedSizes[productId] || product.sizes[0];
             const price = getSalePrice(product);
             
@@ -1307,5 +1312,35 @@
             });
         }
     </script>
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq-kDExHitF0EIsayNKvOw9sGQZC89FdQ",
+    authDomain: "hyungt.firebaseapp.com",
+    projectId: "hyungt",
+    storageBucket: "hyungt.firebasestorage.app",
+    messagingSenderId: "458181261736",
+    appId: "1:458181261736:web:78f3bf83ef56f967df059d",
+    measurementId: "G-EP2Z5WYEQY"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  window.logFirebaseClick = function(productId, variant) {
+    logEvent(analytics, "product_click", {
+      product_id: productId,
+      variant: variant
+    });
+  };
+        window.logAddToCart = function(productId, variant) {
+  logEvent(analytics, "add_to_cart", {
+    product_id: productId,
+    variant: variant
+  });
+};
+</script>
 </body>
 </html>
